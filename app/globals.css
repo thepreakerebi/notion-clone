@@ -3,6 +3,10 @@
 
 @custom-variant dark (&:is(.dark *));
 
+body,html, :root {
+    height: 100%;
+}
+
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
@@ -120,3 +124,4 @@
     @apply bg-background text-foreground;
   }
 }
+
