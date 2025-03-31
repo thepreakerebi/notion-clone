@@ -17,6 +17,7 @@ interface ItemProps {
   onClick: () => void;
   icon: LucideIcon;
 }
+
 const Item = ({
   label,
   id,
@@ -29,6 +30,13 @@ const Item = ({
   onClick,
   icon: Icon,
 }: ItemProps) => {
+  const handleExpand = (
+    event: React.MouseEvent<HTMLDivElement, MouseEvent>,
+  ) => {
+    event.stopPropagation();
+    onExpand?.();
+  };
+
   const ChevronIcon = expanded ? ChevronDown : ChevronRight;
 
   return (
@@ -45,7 +53,7 @@ const Item = ({
         <div
           role="button"
           className="h-full rounded-sm hover:bg-neutral-200 dark:hover:bg-neutral-600 mr-1"
-          onClick={() => {}}
+          onClick={handleExpand}
         >
           <ChevronIcon className="h-4 w-4 shrink-0 text-muted-foreground/50" />
         </div>
