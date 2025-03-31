@@ -12,11 +12,11 @@ import { useRef, useState, ComponentRef, useEffect } from "react";
 import { useMediaQuery } from "usehooks-ts";
 import { cn } from "@/lib/utils";
 import UserItem from "./user-item";
-import { useQuery } from "convex/react";
 import { api } from "@/convex/_generated/api";
 import Item from "./item";
 import { useMutation } from "convex/react";
 import { toast } from "sonner";
+import DocumentList from "./document-list";
 
 const Navigation = () => {
   const pathname = usePathname();
@@ -26,7 +26,6 @@ const Navigation = () => {
   const navbarRef = useRef<ComponentRef<"div">>(null);
   const [isResetting, setIsResetting] = useState(false);
   const [isCollaped, setIsCollapsed] = useState(isMobile);
-  const documents = useQuery(api.documents.get);
 
   const create = useMutation(api.documents.create);
 
@@ -150,18 +149,7 @@ const Navigation = () => {
           <Item onClick={handleCreate} label="New document" icon={PlusCircle} />
         </div>
         <div className="mt-4">
-          {documents?.map((document) => (
-            <div
-              key={document._id}
-              className={cn(
-                "group flex items-center justify-between px-4 py-2 hover:bg-neutral-200 dark:hover:bg-neutral-400",
-                pathname === `/documents/${document._id}` &&
-                  "bg-primary text-primary-foreground",
-              )}
-            >
-              <p>{document.title}</p>
-            </div>
-          ))}
+          <DocumentList />
         </div>
         <div
           onMouseDown={handleMouseDown}
