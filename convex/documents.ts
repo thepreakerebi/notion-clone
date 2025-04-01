@@ -206,10 +206,10 @@ export const getSearch = query({
 });
 
 export const getByID = query({
-  args: { id: v.id("documents") },
+  args: { documentId: v.id("documents") },
   handler: async (ctx, args) => {
     const identity = await ctx.auth.getUserIdentity();
-    const document = await ctx.db.get(args.id);
+    const document = await ctx.db.get(args.documentId);
     if (!identity) {
       throw new Error("Not authenticated");
     }

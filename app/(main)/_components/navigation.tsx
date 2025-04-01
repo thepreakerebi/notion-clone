@@ -191,7 +191,7 @@ const Navigation = () => {
           isMobile && "left-0 w-full",
         )}
       >
-        {!!params.documentsId ? (
+        {!!params.documentId ? (
           <Navbar isCollapsed={isCollaped} onResetWidth={resetWidth} />
         ) : (
           <nav className="bg-transparent px-3 py-2 w-full">
