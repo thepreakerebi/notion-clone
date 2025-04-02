@@ -50,7 +50,7 @@ const Cover = ({ url, preview }: CoverProps) => {
             className="text-muted-foreground text-xs"
             variant={"outline"}
             size={"sm"}
-            onClick={coverImage.onOpen}
+            onClick={() => coverImage.onReplace(url)}
           >
             <ImageIcon className="h-4 w-4 mr-2" />
             Change cover
