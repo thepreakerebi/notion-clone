@@ -257,3 +257,27 @@ export const update = mutation({
     return document;
   },
 });
+
+export const removeIcon = mutation({
+  args: {
+    documentId: v.id("documents"),
+  },
+  handler: async (ctx, args) => {
+    const identity = await ctx.auth.getUserIdentity();
+    const { documentId } = args;
+    if (!identity) {
+      throw new Error("Not authenticated");
+    }
+    const existingDocument = await ctx.db.get(documentId);
+    if (!existingDocument) {
+      throw new Error("Not found");
+    }
+    if (existingDocument.userId !== identity.subject) {
+      throw new Error("Unauthorized");
+    }
+    const updatedDocument = await ctx.db.patch(documentId, {
+      icon: undefined,
+    });
+    return updatedDocument;
+  },
+});
